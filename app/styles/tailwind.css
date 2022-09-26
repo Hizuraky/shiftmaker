@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .hidden-scrollbar {
+    -ms-overflow-style: none; /* IE, Edge 対応 */
+    scrollbar-width: none; /* Firefox 対応 */
+  }
+  .hidden-scrollbar::-webkit-scrollbar {
+    /* Chrome, Safari 対応 */
+    display: none;
+  }
+}
+
+@layer components {
+  .button:after {
+    content: "";
+    background: rgba(255,255,255,0.5);
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+  }
+  
+  .button:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
+  }
+
+  .text-vertical {
+    writing-mode: vertical-rl;
+    text-orientation: upright;  
+  }
+
+  .trans50 {
+    transition: 0.5s
+  }
+
+  .trans30 {
+    transition: 0.3s
+  }
+
+  .trans15 {
+    transition: 0.15s
+  }
+  
+  .modal {
+    animation: opacityTrans 0.2s ease-out;
+  }
+
+  @keyframes opacityTrans {
+    0% {
+      opacity: 0;
+    },
+    100% {
+      opacity: 1;
+    }
+  }
+
+  .modal_contents{
+    animation: scaleUp 0.2s ease-out;
+  }
+
+  @keyframes scaleUp {
+    0% {
+      transform: translateY(-10vh);
+    }
+    100% {
+      transform: scale(1, 1);
+    }
+  }
+
+  .smartTable{
+    overflow-x: scroll;
+    -webkit-overflow-scrolling:auto;
+    width: 100%;
+  }
+  .smartTable table{
+      margin: 0;
+      border-spacing: 0;
+  }
+  .smartTable th{
+      position: sticky;
+      position: -webkit-sticky;
+      top: 0;
+      left: 0;  
+  }
+  .smartTable td{
+      white-space: nowrap;
+  }
+  .evenColor tr:nth-of-type(2n) td{
+    background-color:#f0f9f8
+  }
+
+  input {
+    font-size: 16px;
+    transform: scale(0.85);
+  }
+
+  .cardContainer {
+    border-width: 2px;
+    padding: 0.75rem;
+    border-radius: 0.375rem/* 6px */;
+    font-size: 1rem/* 16px */;
+    line-height: 1.5rem/* 24px */;
+    --tw-bg-opacity: 1;
+    background-color: rgb(246 250 249 / var(--tw-bg-opacity));
+    position: relative;
+    padding-top: 2.5rem/* 40px */;
+    margin-top: 3.5rem/* 56px */;
+    width: 100%
+
+  }
+  .cardTitle {
+    font-weight: 700;
+    --tw-text-opacity: 1;
+    color: rgb(56 95 95 / var(--tw-text-opacity));
+    font-size: 1rem/* 16px */;
+    line-height: 1.5rem/* 24px */;
+    position: absolute;
+    top: -30px;
+    left: -10px;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 1;
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    border-radius: 0.375rem/* 6px */;
+    padding: 0.75rem/* 12px */;
+    border-width: 1px;
+  }
+  .cardSection{
+    margin-bottom: 2.5rem/* 40px */;
+    background-color: rgb(255 255 255 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 1;
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+    padding: 1rem/* 16px */;
+    border-radius: 0.375rem/* 6px */;
+    position: relative;
+    width: 100%
+  }
+  .cardNumber{
+    position: absolute;
+    border-radius: 9999px;
+    background-color: rgb(238 132 136 / var(--tw-bg-opacity));
+    --tw-bg-opacity: 1;
+    color: rgb(255 255 255 / var(--tw-text-opacity));
+    --tw-text-opacity: 1;
+    top: -12px;
+    left: -10px;
+    width: 2rem/* 32px */;
+    height: 2rem/* 32px */;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  }
+  .toggle{
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    width: 50px;
+    height: 30px;
+    max-width: 100%;
+    background: white;
+    border-radius: 100em;
+    box-shadow: inset 0px 1px 1px 1px #d6d6d6, inset 0 -1px 1px 1px #ececec, inset 0 0 0px 2px #f5f5f5;
+  }
+  .toggle::before{
+      content: "";
+      display: block;
+      position: absolute;
+      left: 5%;
+      top: 10%;
+      width: 50%;
+      height: 80%;
+      background: white;
+      border-radius: 100%;
+      box-shadow: -2px 2px 2px 0 #bbbbbb, 0px 0px 10px 0 #e4e4e4;
+      transition: all .2s;
+  }
+  .toggleOn{
+      background: #72B4C0;
+      box-shadow: unset;
+  }
+  .toggleOn::before{
+      margin-left: 40%;
+      box-shadow: 2px 2px 2px 0 #bbbbbb, 0px 0px 10px 0 #e4e4e4;
+  }
+}
