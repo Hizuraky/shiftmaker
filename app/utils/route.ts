@@ -1,20 +1,26 @@
 // 各画面のpathname
 
-export const userRoute = [
+export const inUserRoute = (pathname: string) => {
+  const route = ["/create/date", "/create/confirm", "/create/automation", "/workingTime", "/mypage"]
+  return route.includes(pathname) || pathname.startsWith("/shift") || pathname.endsWith("/show") || pathname.endsWith("/edit")
+}
+
+export const inGuestRoute = (pathname: string) => {
+  const route = ["/", "/login", "/register"]
+  return route.includes(pathname)
+}
+
+export const generalRoute = [
   "/shift",
-  "/shift/:id",
+  "/shift/$date",
   "/create/date",
   "/create/confirm",
   "/create/automation",
   "/workingTime",
   "/mypage",
-  "/:id/:id/show",
-  "/:id/:id/edit",
-  "/login",
-  "/register",
+  "/$date/$shiftId/show",
+  "/$date/$shiftId/edit",
   "/manual",
   "/policy",
   "/terms"
 ]
-
-export const guestRoute = ["/login", "/register", "/manual", "/policy", "/terms"]

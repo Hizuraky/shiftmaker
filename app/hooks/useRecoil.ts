@@ -145,7 +145,8 @@ export const useUserRecoil = () => {
   const [recoilUser, setRecoilUser] = useRecoilState(
     atom<{ uid: string; name: string | null; email: string | null; createdAt?: string } | undefined>({
       key: "useUserRecoil",
-      default: undefined
+      default: undefined,
+      effects_UNSTABLE: [persistAtom]
     })
   )
   return { recoilUser, setRecoilUser }

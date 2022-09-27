@@ -7,7 +7,7 @@ import { ApolloClient, InMemoryCache, createHttpLink } from "@apollo/client"
 import { setContext } from "@apollo/client/link/context"
 import { DefaultLayout } from "app/components/layouts/DefaultLayout"
 import { useGQLErrorRecoil } from "app/hooks/useRecoil"
-import { userRoute, guestRoute } from "app/utils/route"
+import { inUserRoute, inGuestRoute, generalRoute } from "app/utils/route"
 import { Spinner } from "app/components/Spinner"
 
 /***
@@ -47,10 +47,10 @@ export const CustomProvider = ({ children }: { children: JSX.Element }) => {
         !idToken && setIdToken(await userInfo.getIdToken())
         !recoilUser &&
           setRecoilUser({ uid: userInfo.uid, name: userInfo.displayName, email: userInfo.email, createdAt: userInfo.metadata.creationTime })
-        !userRoute.includes(pathname) && navigate("/shift")
+        inGuestRoute(pathname) && navigate("/shift")
       } else {
         setRecoilUser(undefined)
-        !guestRoute.includes(pathname) && navigate("/login", { state: { isRedirect: true } })
+        inUserRoute(pathname) && navigate("/login", { state: { isRedirect: true } })
       }
     })
 
@@ -68,12 +68,13 @@ export const CustomProvider = ({ children }: { children: JSX.Element }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recoilGQLerror])
 
-  if ((!recoilUser && guestRoute.includes(pathname)) || (recoilUser && userRoute.includes(pathname))) {
+  // 未ログイン状態でユーザーページ、ログイン状態でゲストページは開けないように制御
+  if ((recoilUser && inUserRoute(pathname)) || (!recoilUser && inGuestRoute(pathname))) {
     return (
       <DefaultLayout>
         <>
           <ApolloProvider client={client}>{children}</ApolloProvider>
-          {userRoute.map((path) => (
+          {generalRoute.map((path) => (
             <Link to={path} key={path} prefetch="render">
               <div className="hidden" />
             </Link>
